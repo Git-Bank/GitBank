@@ -1,19 +1,34 @@
+// ===========================================
+// =====            App.js               =====
+// ===========================================
+
+// Requirements: express (server management) 
+// jswt (jsonwebtoken) (Creates web tokens)
 const express = require('express');
 const jwt = require('jsonwebtoken');
 
 const app = express();
 
+
 app.get('/api', (req, res) => {
     res.json({
-        message: 'Hello Zach. Welcome to the API.'
+        message: 'Hello. Welcome to the API.'
     });
 });
 
 
-app.post('/api/posts', verifyToken /* Middleware function */, (req, res) => {
-    res.json({
-        message: 'Post created... Looking good'
+app.post('/api/posts', verifyToken /* Middleware function */ , (req, res) => {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            res.json({
+                message: 'Post created.',
+                authData
+            });
+        }
     });
+
 });
 
 app.post('/api/login', (req, res) => {
@@ -25,8 +40,10 @@ app.post('/api/login', (req, res) => {
         username: 'brad',
         email: 'brad@gmail.com'
     }
-// This gets us our token back, which is everything we need to reach a 'protected route'
-    jwt.sign({user}, 'secretkey', (err, token) => {
+    // This gets us our token back, which is everything we need to reach a 'protected route'
+    jwt.sign({
+        user
+    }, 'secretkey', { expiresIn: '60m' }, (err, token) => {
         res.json({
             token
         });
@@ -43,13 +60,36 @@ function verifyToken(req, res, next) {
     // Get Auth header value, sends token in header as an authorization value.
     const bearerHeader = req.headers['authorization']; // Gets actual token.
     // Check if bearer is undefined
-    if(typeof bearerHeader !== 'undefined'){
-
+    if (typeof bearerHeader !== 'undefined') {
+        // Split at the space
+        const bearer = bearerHeader.split(' ');
+        // Get token from array
+        const bearerToken = bearer[1];
+        // Set the token 
+        req.token = bearerToken;
+        // Next
+        next();
     } else {
-        // Forbidden
+        // Sends a Forbidden message if the bearer is undefined.
         res.sendStatus(403);
     }
 
 }
 
+
+// json object example
+/*
+{
+    
+    "message": "Post created.",         validation that the post was actually created.
+    "authData": {                       name of our object
+        "user": {                       user branch
+            "id": 1,                    unique id
+            "username": "brad",         unique username
+            "email": "brad@gmail.com"   email (not unique)
+        },
+        "iat": 1526426965               iat means "issued at", our token has a lifespan of 60 minutes.
+    }
+}
+*/
 app.listen(5100, () => console.log('Server started on port 5100'));
