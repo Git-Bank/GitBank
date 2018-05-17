@@ -1,0 +1,23 @@
+{
+  "name": "gitbank",
+  "version": "1.0.0",
+  "description": "Self Budgeting app ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Git-Bank/GitBank.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Git-Bank/GitBank/issues"
+  },
+  "homepage": "https://github.com/Git-Bank/GitBank#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1"
+  }
+}

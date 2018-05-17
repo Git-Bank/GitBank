@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GitBank</title>
+<link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css">
+<link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
+<link rel="stylesheet" type="text/css" media="screen" href="assets/css/gitbank.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+  
+<!--Load the AJAX API-->  
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+  
+// Load the Visualization API and the corechart package.
+    google.charts.load('current', {'packages':['corechart']});
+
+// Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+
+// Callback that creates and populates a data table, instantiates the pie chart, passes in the data and draws it.
+    function drawChart() {
+  
+// Create the data table.
+      var data = google.visualization.arrayToDataTable([
+        ['Day of the Week', 'Income', 'Expenses', 'Upcoming'],
+        ['Sunday',  450, 375, 175],
+        ['Monday',  410, 675, 175],
+        ['Tuesday',  470, 475, 175],
+        ['Wednesday',  550, 575, 175],
+        ['Thursday',  470, 105, 175],
+        ['Friday',  350, 400, 175],
+        ['Saturday',  450, 275, 175],
+
+      ]);
+
+// Set chart options
+      var options = {
+        title: 'Cashflow',
+        curveType: 'function',
+        legend: { position: 'bottom' }
+      };
+
+// Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+      chart.draw(data, options);
+    }
+  </script>
+</head>
+
+  <body>
+
+
+
+  <header>
+  <h1 class="logo">GitBank</h1>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+  <nav class="nav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="P2.html">P2</a></li>
+      <li><a href="#">P3</a></li>
+      <li><a href="#"><i class="fas fa-key"></i>Login</a></li>
+    </ul>
+  </nav>
+      <label for="nav-toggle" class="nav-toggle__label">
+        <span></span>
+      </label>
+    </header>
+    
+    <div class="content">
+    <div class="FormContainer">
+    
+    <div id="grid">
+      <br>
+      <div class="overview">
+        <div>Overview</div>
+      </div>
+        <br>
+      <div>Income</div>
+      <div>Dues</div>
+      <div>Goals</div>
+    
+    </div>
+    
+  <div id="grid">
+
+  <!--Div that will hold the charts-->
+<div id="curve_chart" style="width: 450px; height: 250px"></div>
+
+  </div>
+
+    <form class="usa-form">
+      <fieldset>
+        <legend>FORM</legend>
+        <label for="title">Item
+    
+    <br>
+        </label>
+        <input class="usa-input-tiny" id="item" name="item" type="text">
+    <br>
+    
+        <label for="category">Category</label>
+    <br>
+        <input id="category" name="category" type="text" required aria-required="true">
+      <br>
+        <label for="Income/Expense">Income/Expense</label>
+    <br>
+    
+        <input id="income/expense" name="income/expense" type="text">
+    <br>
+        <label for="value">Value</label>
+    <br>
+        <input id="value" name="value" type="value" required aria-required="true">
+      <br>
+        <p><button>Submit</button></p>
+        <br>
+      </fieldset>
+    </form>
+    
+    </div>
+        
+    <style>
+    
+    .columnDivider { border-right: 1px solid #DEDEDE; margin-right:-10px; /* size of gutter */ padding-right:10px; /* size of
+    gutter */ }
+    
+    .ui#content{  padding-top: 75px; }
+    
+    /* Style the links inside the navigation bar */
+    .topnav a { float: left; color: #433bb4; text-align: center; padding: 14px
+    16px; text-decoration: none; font-size: 17px; } /* Change the color of links on hover */ .topnav a:hover { background-color:
+    rgb(60, 221, 200); color: black; } /* Add a color to the active/current link */ .topnav a.active { background-color: #4CAF50; color: white;
+    border-bottom:2px solid rgb(0,0,0);padding-bottom:10px;
+    
+    }
+    .main-navigation {
+      border-bottom-style: solid;
+      border-bottom-color: black;
+      border-bottom-width: 2px;
+    }
+    
+    .overview {
+      text-align:center;
+      margin-right:auto;
+      margin-left:auto;
+      color:black;
+      background-color:white; }
+    
+    
+    
+    .middle {
+      width: 100%;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      padding-top:50px;
+    
+    }
+    .login {
+      float:right;
+    
+    }
+    
+      #grid {
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+        width: 75%;
+        float: left;
+        border:1px solid black;
+        border-radius: 25px;
+        text-align: center;
+        background-color: white;
+    
+        padding-right:20px;
+    
+      }
+    
+      #grid>div {
+    
+        color: rgb(7, 7, 7);
+        font-size: 4vw;
+        padding: 5px;
+    
+        border-radius: 25px;
+    
+      }
+    
+    
+    .usa-form {
+      float:right;
+      text-align:center;
+      width: 22%;
+      border-radius:25px;
+      padding-right:10px;
+      padding-left:10px;
+      margin-bottom: 700px;
+      margin-right:-10px;
+      background-color: white;
+    
+    }
+    #input {
+      text-align:center;
+    }
+    
+    </style>
+            
+            
+      <footer id="footer">
+      <div class ="wrapper">
+        <nav>
+          <img src="assets/images/GMC_1.png" alt="GitBank" style="width:106px;height:59px;">  <br>
+          <i class="fab fa-facebook-square fa-2x"></i>
+          <i class="fab fa-twitter-square fa-2x"></i> <br>
+          &copy; 2018
+        </nav>
+            
+      </div>
+    </footer>
+    
+    <script type="text/javascript" src="assets/javascript/server.js"></script>
+  </body>
+</html>

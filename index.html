@@ -1,80 +1,56 @@
-<!doctype html>
-<title>GitBank</title>
+<!DOCTYPE html>
+<html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>GitBank</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
+    <script src="main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
 </head>
-<div class="topnav">
-<a href="#" class="pull-left">
-<img src="assets/images/resize1.png">
-</a>
-<div class="middle">
-<a href="#page1">| Page 1 |</a>
-<a href="#page2">| Page 2 |</a>
-<a href="#page3">| Page 3 |</a>
-</div>
-<div>
-<div class="login">
-<a href="#login">Login/Logout</div> </div></a>
-</div>
-
-<div id="content" class="ui container">
-<header></header>
 
 
-</div>
-<div class="grid">
-<div class="columnDivider">
-
-</div>
-</div>
-<div class="grid1">
-
-
-</div>
-
-
-
-<form class="usa-form">
-<fieldset>
-  <legend>FORM</legend>
-  <label for="title">Item
-
-<br>
+<body>
+<header>
+  <h1 class="logo">GitBank</h1>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+  <nav class="nav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="P2.html">P2</a></li>
+      <li><a href="#">P3</a></li>
+      <li><a href="#"><i class="fas fa-key"></i>Login</a></li>
+    </ul>
+  </nav>
+  <label for="nav-toggle" class="nav-toggle__label">
+    <span></span>
   </label>
-  <input class="usa-input-tiny" id="item" name="item" type="text">
-<br>
+</header>
+        
+<div id="container">
+  <div class="content">
 
-  <label for="category">Category</label>
-<br>
-  <input id="category" name="category" type="text" required aria-required="true">
-<br>
-  <label for="Income/Expense">Income/Expense</label>
-<br>
-
-  <input id="income/expense" name="income/expense" type="text">
-<br>
-  <label for="value">Value</label>
-<br>
-  <input id="value" name="value" type="value" required aria-required="true">
-<p><button>Submit</button></p>
-</fieldset>
-</form>
-
-
-<div id="grid">
-<br>
-<div class="overview">
-  <div>Overview</div>
+  </div>
 </div>
-  <br>
-<div>Income |</div>
-<div>Payments |</div>
-<div>Upcoming</div>
+    
+<footer id="footer">
+  <div class ="wrapper">
+    <nav>
+      <img src="assets/images/GMC_1.png" alt="GitBank" style="width:106px;height:59px;"> <br>
+        <i class="fab fa-facebook-square fa-2x"></i>
+        <i class="fab fa-twitter-square fa-2x"></i> <br>
+        &copy; 2018
+    </nav>
 
-
-</div>
+  </div>
+</footer>
+    
+<script type="text/javascript" src="assets/javascript/server.js"></script>
+</body>
+</html>
