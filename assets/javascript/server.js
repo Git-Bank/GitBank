@@ -9,26 +9,6 @@ const jwt = require('jsonwebtoken');
 const mysql = require('mysql');
 const app = express();
 
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('budgetdb', 'root', 'vj4cxex6', {
-  host: 'localhost',
-  dialect: 'mysql',
-
-  pool: {
-    max: 500,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
-  },
-  // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
-  operatorsAliases: false
-});
-
-/* const User = sequelize.define('user', {
-    id: sequelize.INT,
-    username: Sequelize.STRING,
-    email: Sequelize.STRING
-  }); */
 
 app.get('/api', (req, res) => {
     res.json({
@@ -61,13 +41,6 @@ app.post('/api/login', (req, res) => {
         email: 'brad@gmail.com'
     }
 
-    /*
-    cont user = {
-        id: req[k].id
-        username: req[k].username
-        email: req[k].email
-    }
-    */
     // This gets us our token back, which is everything we need to reach a 'protected route'
     jwt.sign({
         user
@@ -123,11 +96,3 @@ function verifyToken(req, res, next) {
 */
 app.listen(5300, () => console.log('Server started on port 5300'));
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
