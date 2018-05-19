@@ -6,9 +6,29 @@
 // jswt (jsonwebtoken) (Creates web tokens)
 const express = require('express');
 const jwt = require('jsonwebtoken');
-
+const mysql = require('mysql');
 const app = express();
 
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('budgetdb', 'root', 'vj4cxex6', {
+  host: 'localhost',
+  dialect: 'mysql',
+
+  pool: {
+    max: 500,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  },
+  // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
+  operatorsAliases: false
+});
+
+/* const User = sequelize.define('user', {
+    id: sequelize.INT,
+    username: Sequelize.STRING,
+    email: Sequelize.STRING
+  }); */
 
 app.get('/api', (req, res) => {
     res.json({
@@ -40,10 +60,20 @@ app.post('/api/login', (req, res) => {
         username: 'brad',
         email: 'brad@gmail.com'
     }
+
+    /*
+    cont user = {
+        id: req[k].id
+        username: req[k].username
+        email: req[k].email
+    }
+    */
     // This gets us our token back, which is everything we need to reach a 'protected route'
     jwt.sign({
         user
-    }, 'secretkey', { expiresIn: '60m' }, (err, token) => {
+    }, 'secretkey', {
+        expiresIn: '1h'
+    }, (err, token) => {
         res.json({
             token
         });
@@ -52,7 +82,6 @@ app.post('/api/login', (req, res) => {
 
 // FORMAT OF TOKEN
 // Authorization: Bearer <access_token>
-
 // Verify Token
 
 function verifyToken(req, res, next) {
@@ -73,7 +102,6 @@ function verifyToken(req, res, next) {
         // Sends a Forbidden message if the bearer is undefined.
         res.sendStatus(403);
     }
-
 }
 
 
@@ -88,8 +116,18 @@ function verifyToken(req, res, next) {
             "username": "brad",         unique username
             "email": "brad@gmail.com"   email (not unique)
         },
-        "iat": 1526426965               iat means "issued at", our token has a lifespan of 60 minutes.
+        "iat": 1526426965,              iat means "issued at", our token has a lifespan of 60 minutes.
+        "exp": 1526426965               simply proclaims that there's an expiration time.
     }
 }
 */
-app.listen(5100, () => console.log('Server started on port 5100'));
+app.listen(5300, () => console.log('Server started on port 5300'));
+
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
