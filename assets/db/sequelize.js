@@ -27,3 +27,7 @@ const User = sequelize.define('userbase', {
   .catch(err => {
     console.error('Unable to connect to the database:', err);
   });
+
+
+
+// Zach Frame 5/19/2018
